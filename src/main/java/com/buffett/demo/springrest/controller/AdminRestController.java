@@ -19,41 +19,41 @@ public class AdminRestController {
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> usersList = userService.getAllUsers();
         if (usersList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(usersList, HttpStatus.OK); // 200
+        return new ResponseEntity<>(usersList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable long id) {
         User user = userService.getUserById(id);
         if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(user, HttpStatus.OK); // 200
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<User> addNewUser(@RequestBody User user) {
         if (userService.addNewUser(user)) {
-            return new ResponseEntity<>(user, HttpStatus.CREATED); // 201
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(user,HttpStatus.CONFLICT); // 409
+        return new ResponseEntity<>(user,HttpStatus.CONFLICT);
     }
 
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         if (userService.updateUser(user)) {
-            return new ResponseEntity<>(user, HttpStatus.OK); // 200
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.CONFLICT); // 409
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteUserById(@PathVariable long id) {
         if (userService.deleteUserById(id)) {
-            return new ResponseEntity<>(id, HttpStatus.OK); // 200
+            return new ResponseEntity<>(id, HttpStatus.OK);
         }
-        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND); //404
+        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 }
